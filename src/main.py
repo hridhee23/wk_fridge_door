@@ -1,33 +1,30 @@
 from gpiozero import DigitalInputDevice
-from signal import pause
 import pygame
+import time
 
-# GPIO 27
-hall_sensor = DigitalInputDevice(27, pull_up=True)
+sensor1 = DigitalInputDevice(27, pull_up=True, bounce_time=0.1)
+sensor2 = DigitalInputDevice(17, pull_up=True, bounce_time=0.1)
 
-# Initialize pygame mixer
 pygame.mixer.init()
-
-# Load audio file
 pygame.mixer.music.load("../audio/test.mp3")
 
-def magnet_removed():
-    print("Magnet removed -> play audio")
 
-    if not pygame.mixer.music.get_busy():
-        pygame.mixer.music.play()
+def update():
+    s1 = sensor1.value
+    s2 = sensor2.value
 
-def magnet_present():
-    print("Magnet detected -> stop audio")
+    magnet1_away = (s1 == 0)
+    magnet2_away = (s2 == 0)
 
-    pygame.mixer.music.stop()
+    if magnet1_away or magnet2_away:
+        if not pygame.mixer.music.get_busy():
+            pygame.mixer.music.play(-1)
+    else:
+        pygame.mixer.music.stop()
 
-# Most hall sensors:
-# LOW  = magnet present
-# HIGH = magnet removed
 
-hall_sensor.when_activated = magnet_present
-hall_sensor.when_deactivated = magnet_removed
+print("Running...")
 
-print("Waiting for magnet events...")
-pause()
+while True:
+    update()
+    time.sleep(0.1)
