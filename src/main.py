@@ -4,6 +4,7 @@ import time
 
 sensor1 = DigitalInputDevice(27, pull_up=True, bounce_time=0.1)
 sensor2 = DigitalInputDevice(17, pull_up=True, bounce_time=0.1)
+time.sleep(5)
 
 pygame.mixer.init()
 pygame.mixer.music.load("../audio/test.mp3")
