@@ -12,6 +12,7 @@ sensor1 = DigitalInputDevice(27, pull_up=True, bounce_time=0.1)
 sensor2 = DigitalInputDevice(17, pull_up=True, bounce_time=0.1)
 time.sleep(5)
 
+pygame.mixer.pre_init(44100, -16, 2, 4096)
 pygame.mixer.init()
 
 startup = pygame.mixer.Sound(os.path.join(AUDIO_DIR, "startup.mp3"))
