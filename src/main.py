@@ -1,6 +1,8 @@
 from gpiozero import DigitalInputDevice
 import pygame
 import time
+import os
+os.environ["SDL_AUDIODRIVER"] = "alsa"
 
 sensor1 = DigitalInputDevice(27, pull_up=True, bounce_time=0.1)
 sensor2 = DigitalInputDevice(17, pull_up=True, bounce_time=0.1)
