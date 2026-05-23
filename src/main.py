@@ -1,15 +1,23 @@
+import os
+os.environ["SDL_AUDIODRIVER"] = "alsa"
+
 from gpiozero import DigitalInputDevice
 import pygame
 import time
-import os
-os.environ["SDL_AUDIODRIVER"] = "alsa"
+
+AUDIO_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "audio")
 
 sensor1 = DigitalInputDevice(27, pull_up=True, bounce_time=0.1)
 sensor2 = DigitalInputDevice(17, pull_up=True, bounce_time=0.1)
 time.sleep(5)
 
 pygame.mixer.init()
-pygame.mixer.music.load("../audio/main_audio.mp3")
+
+startup = pygame.mixer.Sound(os.path.join(AUDIO_DIR, "startup.mp3"))
+startup.play()
+pygame.time.wait(int(startup.get_length() * 1000))
+
+pygame.mixer.music.load(os.path.join(AUDIO_DIR, "main_audio.mp3"))
 
 
 def update():
