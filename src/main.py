@@ -15,10 +15,12 @@ time.sleep(5)
 pygame.mixer.init()
 
 startup = pygame.mixer.Sound(os.path.join(AUDIO_DIR, "startup.mp3"))
+startup.set_volume(0.8)
 startup.play()
 pygame.time.wait(int(startup.get_length() * 1000))
 
 pygame.mixer.music.load(os.path.join(AUDIO_DIR, "main_audio.mp3"))
+pygame.mixer.music.set_volume(0.8)
 
 
 def update():
