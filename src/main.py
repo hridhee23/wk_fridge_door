@@ -1,5 +1,6 @@
 import os
 os.environ["SDL_AUDIODRIVER"] = "alsa"
+os.environ["AUDIODEV"] = "hw:1,0"
 
 from gpiozero import DigitalInputDevice
 import pygame
