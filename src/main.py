@@ -28,7 +28,7 @@ def update():
     s1 = sensor1.value
     s2 = sensor2.value
 
-    magnet1_away = (s1 == 1)
+    magnet1_away = (s1 == 0)
     magnet2_away = (s2 == 0)
 
     if magnet1_away or magnet2_away:
